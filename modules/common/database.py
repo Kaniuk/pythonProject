@@ -26,6 +26,12 @@ class Database:
         record = self.cursor.fetchall()
         return record
 
+    def select_product_by_id(self, product_id):
+        query = f"SELECT id,name,description, quantity FROM products WHERE id = {product_id}"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+
     def update_product_qnt_by_id(self, product_id, qnt):
         query = f"UPDATE products SET quantity = {qnt} WHERE id = {product_id}"
         self.cursor.execute(query)
@@ -38,6 +44,11 @@ class Database:
         return record
 
     def insert_product(self, product_id, name, description, qnt):
+        if not isinstance(description, str):
+            raise TypeError("Description must be a string")
+        if not isinstance(product_id, int) or not isinstance(qnt, int):
+            raise TypeError("Product id and quantity must be integer")
+
         query = f"INSERT OR REPLACE INTO products (id,name,description,quantity) \
               VALUES ({product_id},'{name}','{description}',{qnt})"
         self.cursor.execute(query)

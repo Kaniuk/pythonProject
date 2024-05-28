@@ -46,6 +46,42 @@ def test_product_insert():
 
 
 @pytest.mark.database
+def test_handle_invalid_name_and_description_lenght():
+    db = Database()
+    db.insert_product(5, "A" * 25, "solodke", 35)
+    product = db.select_product_by_id(5)
+    print(f" Продукт ============ {product}")
+
+    assert len(product[0][1]) >= 3 and len(product[0][1]) <= 25
+    assert len(product[0][2]) >= 3 and len(product[0][1]) <= 25
+
+
+@pytest.mark.database
+def test_add_product_with_invalid_description_type():
+    db = Database()
+    # It is possible to enter integer to name field
+    # with pytest.raises(TypeError):
+    #     db.insert_product(5, 12345, "солодке", 20)
+
+    with pytest.raises(TypeError):
+        db.insert_product(6, "печиво", 67890, 20)
+
+    with pytest.raises(TypeError):
+        db.insert_product(7, 12345, 67890, 20)
+
+
+@pytest.mark.database
+def test_add_product_with_invalid_product_id_or_qnt():
+    db = Database()
+
+    with pytest.raises(TypeError):
+        db.insert_product("", "печиво", "солодке", 30)
+
+    with pytest.raises(TypeError):
+        db.insert_product(4, "печиво", "солодке", "pouy")
+
+
+@pytest.mark.database
 def test_product_delete():
     db = Database()
     db.insert_product(99, "testovi", "dani", 999)

@@ -17,9 +17,6 @@ def test_second_request():
     assert body["name"] == "Chris Wanstrath"
     assert r.status_code == 200
     assert headers["Server"] == "GitHub.com"
-    # print(f"Pesponse Body is {r.json()}")
-    # print(f"Pesponse Status is {r.status_code}")
-    # print(f"Pesponse Headers are {r.headers}")
 
 
 @pytest.mark.http
