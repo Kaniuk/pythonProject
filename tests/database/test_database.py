@@ -28,6 +28,37 @@ def test_check_user():
 
 
 @pytest.mark.database
+def test_add_user():
+    db = Database()
+    db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "Lviv", 5555, "Ukraine")
+    user = db.get_user_address_by_name("Anrriy")
+
+    assert user[0][0] == "Maydan Nezalezhnosti 2"
+    assert user[0][1] == "Lviv"
+    assert user[0][2] == "5555"
+    assert user[0][3] == "Ukraine"
+
+
+@pytest.mark.database
+def test_add_user_without_data():
+    db = Database()
+    with pytest.raises(ValueError, match="Name cannot be empty"):
+        db.insert_user("", "Maydan Nezalezhnosti 2", "Lviv", 5555, "Ukraine")
+
+    with pytest.raises(ValueError, match="Address cannot be empty"):
+        db.insert_user("Anrriy", "", "Lviv", 5555, "Ukraine")
+
+    with pytest.raises(ValueError, match="City cannot be empty"):
+        db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "", 5555, "Ukraine")
+
+    with pytest.raises(ValueError, match="Postal code cannot be empty"):
+        db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "Lviv", "", "Ukraine")
+
+    with pytest.raises(ValueError, match="Country cannot be empty"):
+        db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "Lviv", 5555, "")
+
+
+@pytest.mark.database
 def test_product_qnt_update():
     db = Database()
     db.update_product_qnt_by_id(1, 25)
