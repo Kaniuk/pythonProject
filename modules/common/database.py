@@ -20,8 +20,25 @@ class Database:
         record = self.cursor.fetchall()
         return record
 
+    def insert_user(self, name, address, city, postalCode, country):
+        if not name:
+            raise ValueError("Name cannot be empty")
+        if not address:
+            raise ValueError("Address cannot be empty")
+        if not city:
+            raise ValueError("City cannot be empty")
+        if not postalCode:
+            raise ValueError("Postal code cannot be empty")
+        if not country:
+            raise ValueError("Country cannot be empty")
+
+        query = f"INSERT OR REPLACE INTO customers (name,address,city,postalCode,country) \
+              VALUES ('{name}','{address}','{city}',{postalCode},'{country}')"
+        self.cursor.execute(query)
+        self.connection.commit()
+
     def get_user_address_by_name(self, name):
-        query = f"SELECT address,city,postalCode,country FROM customers WHERE name = '{name}'"
+        query = f"SELECT address,city,postalCode,country,id FROM customers WHERE name = '{name}'"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
