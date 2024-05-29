@@ -22,15 +22,15 @@ class Database:
 
     def insert_user(self, name, address, city, postalCode, country):
         if not name:
-            raise ValueError("Name cannot be empty")
+            raise ValueError("Name field cannot be empty")
         if not address:
-            raise ValueError("Address cannot be empty")
+            raise ValueError("Address field cannot be empty")
         if not city:
-            raise ValueError("City cannot be empty")
+            raise ValueError("City field cannot be empty")
         if not postalCode:
-            raise ValueError("Postal code cannot be empty")
+            raise ValueError("Postal code field cannot be empty")
         if not country:
-            raise ValueError("Country cannot be empty")
+            raise ValueError("Country field cannot be empty")
 
         query = f"INSERT OR REPLACE INTO customers (name,address,city,postalCode,country) \
               VALUES ('{name}','{address}','{city}',{postalCode},'{country}')"
@@ -50,6 +50,11 @@ class Database:
         return record
 
     def update_product_qnt_by_id(self, product_id, qnt):
+        if not product_id or not isinstance(product_id, int):
+            raise ValueError("Id field must be integer")
+        if not qnt or not isinstance(qnt, int):
+            raise ValueError("Quantity field must be integer")
+
         query = f"UPDATE products SET quantity = {qnt} WHERE id = {product_id}"
         self.cursor.execute(query)
         self.connection.commit()

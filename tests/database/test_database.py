@@ -42,19 +42,19 @@ def test_add_user():
 @pytest.mark.database
 def test_add_user_without_data():
     db = Database()
-    with pytest.raises(ValueError, match="Name cannot be empty"):
+    with pytest.raises(ValueError, match="Name field cannot be empty"):
         db.insert_user("", "Maydan Nezalezhnosti 2", "Lviv", 5555, "Ukraine")
 
-    with pytest.raises(ValueError, match="Address cannot be empty"):
+    with pytest.raises(ValueError, match="Address field cannot be empty"):
         db.insert_user("Anrriy", "", "Lviv", 5555, "Ukraine")
 
-    with pytest.raises(ValueError, match="City cannot be empty"):
+    with pytest.raises(ValueError, match="City field cannot be empty"):
         db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "", 5555, "Ukraine")
 
-    with pytest.raises(ValueError, match="Postal code cannot be empty"):
+    with pytest.raises(ValueError, match="Postal code field cannot be empty"):
         db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "Lviv", "", "Ukraine")
 
-    with pytest.raises(ValueError, match="Country cannot be empty"):
+    with pytest.raises(ValueError, match="Country field cannot be empty"):
         db.insert_user("Anrriy", "Maydan Nezalezhnosti 2", "Lviv", 5555, "")
 
 
@@ -68,6 +68,15 @@ def test_product_qnt_update():
 
 
 @pytest.mark.database
+def test_product_qnt_updatet_without_data():
+    db = Database()
+    with pytest.raises(ValueError, match="Id field must be integer"):
+        db.update_product_qnt_by_id("", 26)
+    with pytest.raises(ValueError, match="Quantity field must be integer"):
+        db.update_product_qnt_by_id(1, "")
+
+
+@pytest.mark.database
 def test_product_insert():
     db = Database()
     db.insert_product(4, "печиво", "солодке", 30)
@@ -77,11 +86,11 @@ def test_product_insert():
 
 
 @pytest.mark.database
-def test_handle_invalid_name_and_description_lenght():
+def test_invalid_name_and_description_lenght():
     db = Database()
     db.insert_product(5, "A" * 25, "solodke", 35)
     product = db.select_product_by_id(5)
-    print(f" Продукт ============ {product}")
+    print(f" Продукт: {product}")
 
     assert len(product[0][1]) >= 3 and len(product[0][1]) <= 25
     assert len(product[0][2]) >= 3 and len(product[0][1]) <= 25
