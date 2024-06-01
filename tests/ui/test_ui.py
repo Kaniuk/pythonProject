@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 import time
 
 
-@pytest.mark.ui
+# @pytest.mark.ui
 def test_check_incorrect_username():
     # Create a WebDriver object for managing the browser
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
