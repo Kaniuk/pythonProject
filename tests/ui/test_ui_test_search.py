@@ -1,9 +1,8 @@
 from modules.ui.page_objects.search_field import SearchPage
 import pytest
-import time
 
 
-# @pytest.mark.ui
+@pytest.mark.ui
 def test_check_search():
 
     search_functionality = SearchPage()

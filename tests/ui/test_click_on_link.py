@@ -2,7 +2,7 @@ from modules.ui.page_objects.click_on_link import Click_on_link
 import pytest
 
 
-# @pytest.mark.ui
+@pytest.mark.ui
 def test_check_click_link():
 
     check_click_link = Click_on_link()
