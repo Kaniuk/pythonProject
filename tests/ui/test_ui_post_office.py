@@ -2,7 +2,7 @@ from modules.ui.page_objects.find_post_office import Find_post_office
 import pytest
 
 
-@pytest.mark.ui
+# @pytest.mark.ui
 def test_post_office():
 
     post_office = Find_post_office()
