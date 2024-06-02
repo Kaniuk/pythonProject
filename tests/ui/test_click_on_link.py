@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.ui
-def test_check_click_link():
+def test_check_click_on_link():
 
     check_click_link = Click_on_link()
 

@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.ui
-def test_check_search():
+def test_check_search_field_with_valid_data():
 
     search_functionality = SearchPage()
 

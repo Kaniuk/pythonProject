@@ -3,12 +3,12 @@ import pytest
 
 
 @pytest.mark.ui
-def test_check_product():
+def test_check_click_on_link_to_product_page():
 
-    check_click_link = ProductPage()
+    check_product = ProductPage()
 
-    check_click_link.go_to()
+    check_product.go_to()
 
-    check_click_link.check_product()
+    check_product.check_product()
 
-    check_click_link.close()
+    check_product.close()

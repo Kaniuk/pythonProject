@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.ui
-def test_filter():
+def test_filter_switch_currency():
 
     filter_page = FilterPage()
 

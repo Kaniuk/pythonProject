@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.ui
-def test_post_office():
+def test_search_post_office():
 
     post_office = Find_post_office()
 
