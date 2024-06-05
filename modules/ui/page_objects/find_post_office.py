@@ -40,7 +40,6 @@ class Find_post_office(BasePage):
                 (
                     By.XPATH,
                     f"//li[@id='{city_id}']",
-                    # data-warehouse-number
                 )
             )
         )
@@ -62,5 +61,4 @@ class Find_post_office(BasePage):
         enter_address.click()
 
     def check_title(self, expected_title):
-        print(f"Expected - {self.driver.title}")
         assert self.driver.title == expected_title
